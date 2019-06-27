@@ -1,4 +1,4 @@
-FROM reg.zknt.org/zknt/python:3.6.6-r0
+FROM reg.zknt.org/zknt/python:3.7.3-r0
 
 COPY requirements.txt /app/requirements.txt
 WORKDIR /app
