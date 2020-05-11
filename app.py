@@ -10,14 +10,14 @@ class Store:
     def __init__(self, dbo):
         self.db = dbo
 
-    def add_version(self, pkg, version, bdate, branch='v3.10', arch='x86_64'):
+    def add_version(self, pkg, version, bdate, branch='v3.11', arch='x86_64'):
         pkg_key = json.dumps((pkg, branch, arch))
         versions = json.loads(self.db.get(pkg_key, "{}"))
         if bdate not in versions:
             versions[bdate] = version
         self.db[pkg_key] = json.dumps(versions)
 
-    def get_feed(self, pkgs=None, branch='v3.10', arch='x86_64'):
+    def get_feed(self, pkgs=None, branch='v3.11', arch='x86_64'):
         items = []
         if not pkgs:
             pkgs = ['bash']
@@ -32,7 +32,7 @@ db = dbm.open('/data/cache', 'c')
 pkg_store = Store(db)
 
 
-def get_release(pkg, branch="v3.10", arch="x86_64"):
+def get_release(pkg, branch="v3.11", arch="x86_64"):
     req = requests.get(
         "https://pkgs.alpinelinux.org/packages?name={}&branch={}&arch={}".format(
             pkg,
